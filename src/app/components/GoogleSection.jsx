@@ -6,8 +6,8 @@ import {
   OverlayView,
   DirectionsRenderer,
 } from "@react-google-maps/api";
-import { SourceContext } from "../../../context/SourceContext";
-import { DestinationContext } from "../../../context/Destination";
+import { SourceContext } from "../../context/SourceContext";
+import { DestinationContext } from "../../context/Destination";
 
 const containerStyle = {
   width: "100%",
@@ -31,6 +31,7 @@ const GoogleSection = () => {
   });
 
   const [map, setMap] = useState(null);
+  
   const [route, setRoute] = useState();
 
   // ****

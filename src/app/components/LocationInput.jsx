@@ -2,8 +2,8 @@
 
 import React, { useContext, useState } from "react";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
-import { SourceContext } from "../../../context/SourceContext";
-import { DestinationContext } from "../../../context/Destination";
+import { SourceContext } from "../../context/SourceContext";
+import { DestinationContext } from "../../context/Destination";
 
 export default function LocationInput({ type, value, setValue}) {
 
@@ -24,23 +24,24 @@ export default function LocationInput({ type, value, setValue}) {
   //   );
 
   //   service.getDetails({ placeId }, (place, status) => {
-  //     if (status === "OK" && place.geometry && place.geometry.location) {
-  //       if (type === "source") {
-  //         setSource({
-  //           lat: place.geometry.location.lat(),
-  //           lng: place.geometry.location.lng(),
-  //           name: place.formatted_address,
-  //           label: place.name,
-  //         });
-  //       } else {
-  //         setDestination({
-  //           lat: place.geometry.location.lat(),
-  //           lng: place.geometry.location.lng(),
-  //           name: place.formatted_address,
-  //           label: place.name,
-  //         });
-  //       }
-  //     }
+  //     console.log("place", place);
+      // if (status === "OK" && place.geometry && place.geometry.location) {
+      //   if (type === "source") {
+      //     setSource({
+      //       lat: place.geometry.location.lat(),
+      //       lng: place.geometry.location.lng(),
+      //       name: place.formatted_address,
+      //       label: place.name,
+      //     });
+      //   } else {
+      //     setDestination({
+      //       lat: place.geometry.location.lat(),
+      //       lng: place.geometry.location.lng(),
+      //       name: place.formatted_address,
+      //       label: place.name,
+      //     });
+      //   }
+      // }
   //   });
   // };
 

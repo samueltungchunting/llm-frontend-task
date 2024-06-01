@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import GoogleSection from "./components/GoogleSection";
-import { SourceContext } from "../../context/SourceContext";
-import { DestinationContext } from "../../context/Destination";
+import { SourceContext } from "../context/SourceContext";
+import { DestinationContext } from "../context/Destination";
 import { LoadScript } from "@react-google-maps/api";
 import SearchPlaceSection from "./components/SearchPlaceSection";
 

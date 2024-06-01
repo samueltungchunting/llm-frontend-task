@@ -6,8 +6,8 @@ import { Label } from "@/components/ui/label";
 import { X, LocateFixed, MapPin, Loader2 } from "lucide-react";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import LocationInput from "./LocationInput";
-import { SourceContext } from "../../../context/SourceContext";
-import { DestinationContext } from "../../../context/Destination";
+import { SourceContext } from "../../context/SourceContext";
+import { DestinationContext } from "../../context/Destination";
 
 const SearchPlaceSection = () => {
   // handling the api status, which displays the corresponding message and loading spinner
@@ -201,8 +201,8 @@ const SearchPlaceSection = () => {
             className="flex-1 h-12"
             onClick={() => {
               if (loading) return;
-              setSource([]); // the global state in useContext
-              setSrcValue(null); // the starting location input field
+              setSource([]);      // the global state in useContext
+              setSrcValue(null);  // the starting location input field
               setDestValue(null); // the drop off location input field
               setDistance(null);
               setTime(null);
