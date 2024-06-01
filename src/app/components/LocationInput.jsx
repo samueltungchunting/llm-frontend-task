@@ -11,7 +11,7 @@ export default function LocationInput({ type }) {
   const { destination, setDestination } = useContext(DestinationContext);
 
   const getLatLng = (place, type) => {
-    const placeId = place?.value?.place_id;
+    const placeId = place ? place?.value?.place_id : null;
     const service = new window.google.maps.places.PlacesService(
       document.createElement("div")
     );
@@ -59,6 +59,7 @@ export default function LocationInput({ type }) {
             ...provided,
             border: "none",
             backgroundColor: "#00ffff00",
+            height: "3rem",
           }),
         },
       }}

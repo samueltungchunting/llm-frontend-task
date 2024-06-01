@@ -23,18 +23,10 @@ const SearchPlaceSection = () => {
 
   useEffect(() => {
     if (source) {
-      //   setCenter({
-      //     lat: source.lat,
-      //     lng: source.lng,
-      //   });
       console.log("source", source);
     }
     if (destination) {
-        //   setCenter({
-        //     lat: destination.lat,
-        //     lng: destination.lng,
-        //   });
-        console.log("destination", destination);
+      console.log("destination", destination);
     }
   }, [source, destination]);
 
@@ -122,46 +114,52 @@ const SearchPlaceSection = () => {
   };
 
   return (
-    <>
-      <Label>Starting location</Label>
-      <div className="flex gap-x-1 items-center">
-        <div className="flex items-center w-full rounded-md bg-gray-200">
-          {/* <Input className="pl-9 bg-slate-200" /> */}
-          <MapPin size={18} strokeWidth={2} className="mx-2" />
-          <LocationInput type="source" />
+    <div className="flex flex-col gap-y-6 rounded-lg border-2 p-6">
+      <div className="">
+        <Label>Starting location</Label>
+        <div className="flex gap-x-1 items-center">
+          <div className="flex items-center w-full rounded-md bg-gray-200">
+            {/* <Input className="pl-9 bg-slate-200" /> */}
+            <MapPin size={18} strokeWidth={2} className="mx-2" />
+            <LocationInput type="source" />
+          </div>
         </div>
       </div>
-      <Label>Drop-off point</Label>
-      <div className="flex gap-x-1 items-center">
-        <div className="flex items-center w-full rounded-md bg-gray-200">
-          <LocateFixed size={18} strokeWidth={2} className="mx-2" />
-          <LocationInput type="destination" />
+      <div className="">
+        <Label>Drop-off point</Label>
+        <div className="flex gap-x-1 items-center">
+          <div className="flex items-center w-full rounded-md bg-gray-200">
+            <LocateFixed size={18} strokeWidth={2} className="mx-2" />
+            <LocationInput type="destination" />
+          </div>
         </div>
       </div>
 
       <div className="">
-        <p className="text-red-600">{error}</p>
-        <p>{path?.total_distance}</p>
-      </div>
+        <div className="h-8">
+          {error && <p className="text-red-600">{error}</p>}
+          
+        </div>
 
-      <div className="flex gap-x-4">
-        {loading ? (
-          <Button
-            disabled
-            className="flex-1 flex items-center gap-x-1"
-            onClick={fetchData}
-          >
-            Submit
-            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-          </Button>
-        ) : (
-          <Button className="flex-1" onClick={fetchData}>
-            Submit
-          </Button>
-        )}
-        <Button className="flex-1">Reset</Button>
+        <div className="flex gap-x-4 mt-12">
+          {loading ? (
+            <Button
+              disabled
+              className="flex-1 flex items-center gap-x-1 h-12"
+              onClick={fetchData}
+            >
+              Submit
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            </Button>
+          ) : (
+            <Button className="flex-1 h-12" onClick={fetchData}>
+              Submit
+            </Button>
+          )}
+          <Button className="flex-1 h-12">Reset</Button>
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 

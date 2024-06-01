@@ -20,14 +20,16 @@ export default function Home() {
           googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLEMAP_API_KEY}
           libraries={["places"]}
         >
-          <main className="min-h-screen grid gap-x-4 grid-cols-1 lg:grid-cols-3">
-            <section>
-              <SearchPlaceSection />
-            </section>
-            <div className="col-span-2">
-              <GoogleSection />
-            </div>
-          </main>
+          <div className="flex justify-center">
+            <main className="min-h-screen grid lg:gap-x-6 grid-cols-1 lg:grid-cols-3 max-w-6xl w-full mx-auto">
+              <section className="lg:p-8 lg:pr-0 p-2">
+                <SearchPlaceSection />
+              </section>
+              <div className="col-span-2 lg:p-8 lg:pl-0 p-2 flex justify-center">
+                <GoogleSection />
+              </div>
+            </main>
+          </div>
         </LoadScript>
       </DestinationContext.Provider>
     </SourceContext.Provider>
