@@ -8,8 +8,6 @@ import { LoadScript } from "@react-google-maps/api";
 import SearchPlaceSection from "./components/SearchPlaceSection";
 
 export default function Home() {
-  const [srcValue, setSrcValue] = useState(null);
-  const [destValue, setDestValue] = useState(null);
   const [source, setSource] = useState([]);
   const [destination, setDestination] = useState([]);
 
