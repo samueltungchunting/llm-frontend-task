@@ -1,6 +1,7 @@
 ## Deployment
 This appliaction is deployed via vercel
 Here is the link: [https://llm-frontend-task.vercel.app/]
+Demo Video: [Demo Video here! Click me](https://www.loom.com/share/c6ef7b68f5d74f4eba7c6de9cd166ad4?sid=a481636b-7744-4d44-bb39-d41d4a686fc2)
 
 ### Prerequisites
 - Node.js and npm installed on your local machine.
@@ -14,7 +15,7 @@ Here is the link: [https://llm-frontend-task.vercel.app/]
 
 4. Next, you need to apply for the maps key in order to use application. Below is the step by step guide to apply for the key.
 Also I\'ve record a video to illustrate the application and applying the keys.
-    - Video: www.111.com
+    - Video: [Guides on apply the env variables/keys](https://www.loom.com/share/189e62b630634ba797836283cce701a2?sid=5b572f3e-389a-40b3-8023-001a06918af9)
     4.1- First, go to Google cloud console,
     4.2- Next, Click on the navigation bar toggle at the top left corner, and go to APIs & Services
     4.3- Then, Click on the ENABLE APIS AND SERVICES button at top left, and search for keyword 'Maps' in the search bar
