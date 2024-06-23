@@ -115,6 +115,18 @@ const SearchPlaceSection = () => {
     }
   };
 
+  const calculateDistance = () => {
+    const distance = google.maps.geometry.spherical.computeDistanceBetween(
+      { lat: source.lat, lng: source.lng },
+      { lat: destination.lat, lng: destination.lng }
+    );
+
+    if (distance) {
+      setDistance((distance/1000).toFixed(2)+' km');
+    }
+    console.log("distance", distance);
+  }
+
   return (
     <div className="flex flex-col gap-y-6 rounded-lg border-2 p-6">
       {/* Starting location field & label */}
@@ -187,13 +199,15 @@ const SearchPlaceSection = () => {
             <Button
               disabled
               className="flex-1 flex items-center gap-x-1 h-12"
-              onClick={fetchData}
+              // onClick={fetchData}
+              onClick={calculateDistance}
             >
               Submit
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
             </Button>
           ) : (
-            <Button className="flex-1 h-12" onClick={fetchData}>
+            // <Button className="flex-1 h-12" onClick={fetchData}>
+            <Button className="flex-1 h-12" onClick={calculateDistance}>
               Submit
             </Button>
           )}
@@ -202,6 +216,7 @@ const SearchPlaceSection = () => {
             onClick={() => {
               if (loading) return;
               setSource([]);      // the global state in useContext
+              setDestination([]); // the global state in useContext
               setSrcValue(null);  // the starting location input field
               setDestValue(null); // the drop off location input field
               setDistance(null);

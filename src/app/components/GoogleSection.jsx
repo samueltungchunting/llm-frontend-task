@@ -17,11 +17,6 @@ const containerStyle = {
 };
 
 const GoogleSection = () => {
-  const { isLoaded } = useJsApiLoader({
-    id: "google-map-script",
-    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLEMAP_API_KEY,
-  });
-
   const { source, setSource } = useContext(SourceContext);
   const { destination, setDestination } = useContext(DestinationContext);
 
@@ -31,7 +26,7 @@ const GoogleSection = () => {
   });
 
   const [map, setMap] = useState(null);
-  
+
   const [route, setRoute] = useState();
 
   // ****
@@ -40,130 +35,137 @@ const GoogleSection = () => {
   // And it's fully functional, but it's not used in the project.
   // ****
 
-  // useEffect(() => {
-  //   if (source && source.length != [] && map) {
-  //     map.panTo({
-  //       lat: source.lat,
-  //       lng: source.lng,
-  //     });
-  //     setCenter({
-  //       lat: source.lat,
-  //       lng: source.lng,
-  //     });
-  //   }
-
-  //   // when source and destination are both set, then fetch the route
-  //   if (
-  //     source &&
-  //     destination &&
-  //     source.length != [] &&
-  //     destination.length != []
-  //   ) {
-  //     directionRoute();
-  //   }
-  // }, [source, map]);
-
-  // useEffect(() => {
-  //   if (destination && destination.length != [] && map) {
-  //     map?.panTo({
-  //       lat: destination.lat,
-  //       lng: destination.lng,
-  //     });
-  //     setCenter({
-  //       lat: destination.lat,
-  //       lng: destination.lng,
-  //     });
-  //   }
-
-  //   // when source and destination are both set, then fetch the route
-  //   if (
-  //     source &&
-  //     destination &&
-  //     source.length != [] &&
-  //     destination.length != []
-  //   ) {
-  //     directionRoute();
-  //   }
-  // }, [destination, map]);
-
   useEffect(() => {
     if (source && source.length != [] && map) {
-      map?.panTo({
-        lat: parseFloat(source[0][0]),
-        lng: parseFloat(source[0][1]),
+      map.panTo({
+        lat: source.lat,
+        lng: source.lng,
       });
       setCenter({
-        lat: parseFloat(source[0][0]),
-        lng: parseFloat(source[0][1]),
+        lat: source.lat,
+        lng: source.lng,
       });
+    }
 
+    // when source and destination are both set, then fetch the route
+    if (
+      source &&
+      destination &&
+      source.length != [] &&
+      destination.length != []
+    ) {
       directionRoute();
     } else {
       setRoute(null);
     }
   }, [source, map]);
 
-  // const directionRoute = () => {
-  //   const DirectionsService = new google.maps.DirectionsService();
-  //   DirectionsService.route(
-  //     {
-  //       origin: { lat: source.lat, lng: source.lng },
-  //       destination: { lat: destination.lat, lng: destination.lng },
-  //       travelMode: google.maps.TravelMode.DRIVING,
-  //     },
-  //     (res, status) => {
-  //       if (status === google.maps.DirectionsStatus.OK) {
-  //         setRoute(res);
-  //       } else {
-  //         console.log(`error fetching directions ${res}`);
-  //       }
-  //     }
-  //   );
-  // };
+  useEffect(() => {
+    if (destination && destination.length != [] && map) {
+      map?.panTo({
+        lat: destination.lat,
+        lng: destination.lng,
+      });
+      setCenter({
+        lat: destination.lat,
+        lng: destination.lng,
+      });
+    }
+
+    // when source and destination are both set, then fetch the route
+    if (
+      source &&
+      destination &&
+      source.length != [] &&
+      destination.length != []
+    ) {
+      directionRoute();
+    } else {
+      setRoute(null);
+    }
+  }, [destination, map]);
+
+  // useEffect(() => {
+  //   if (source && source.length != [] && map) {
+  //     map?.panTo({
+  //       lat: parseFloat(source[0][0]),
+  //       lng: parseFloat(source[0][1]),
+  //     });
+  //     setCenter({
+  //       lat: parseFloat(source[0][0]),
+  //       lng: parseFloat(source[0][1]),
+  //     });
+
+  //     directionRoute();
+  //   } else {
+  //     setRoute(null);
+  //   }
+  // }, [source, map]);
 
   const directionRoute = () => {
     const DirectionsService = new google.maps.DirectionsService();
-
-    const origin = {
-      lat: parseFloat(source[0][0]),
-      lng: parseFloat(source[0][1]),
-    };
-    const destination = {
-      lat: parseFloat(source[source.length - 1][0]),
-      lng: parseFloat(source[source.length - 1][1]),
-    };
-
-    const intermediateWaypoints = source
-      .slice(1, source.length - 1)
-      .map((point) => ({
-        location: { lat: parseFloat(point[0]), lng: parseFloat(point[1]) },
-        stopover: true,
-      }));
-
     DirectionsService.route(
       {
-        origin,
-        destination,
-        waypoints: intermediateWaypoints,
+        origin: { lat: source.lat, lng: source.lng },
+        destination: { lat: destination.lat, lng: destination.lng },
         travelMode: google.maps.TravelMode.DRIVING,
       },
       (res, status) => {
         if (status === google.maps.DirectionsStatus.OK) {
           setRoute(res);
         } else {
-          console.error(`error fetching directions ${res}`);
-          console.error(`status: ${status}`);
+          console.log(`error fetching directions ${res}`);
         }
       }
     );
   };
 
-  const onLoad = React.useCallback(function callback(map) {
-    const bounds = new window.google.maps.LatLngBounds(center);
-    map.fitBounds(bounds);
+  // const directionRoute = () => {
+  //   const DirectionsService = new google.maps.DirectionsService();
 
-    setMap(map);
-  }, [center]);
+  //   const origin = {
+  //     lat: parseFloat(source[0][0]),
+  //     lng: parseFloat(source[0][1]),
+  //   };
+  //   const destination = {
+  //     lat: parseFloat(source[source.length - 1][0]),
+  //     lng: parseFloat(source[source.length - 1][1]),
+  //   };
+
+  //   const intermediateWaypoints = source
+  //     .slice(1, source.length - 1)
+  //     .map((point) => ({
+  //       location: { lat: parseFloat(point[0]), lng: parseFloat(point[1]) },
+  //       stopover: true,
+  //     }));
+
+  //   DirectionsService.route(
+  //     {
+  //       origin,
+  //       destination,
+  //       waypoints: intermediateWaypoints,
+  //       travelMode: google.maps.TravelMode.DRIVING,
+  //     },
+  //     (res, status) => {
+  //       if (status === google.maps.DirectionsStatus.OK) {
+  //         setRoute(res);
+  //       } else {
+  //         console.error(`error fetching directions ${res}`);
+  //         console.error(`status: ${status}`);
+  //       }
+  //     }
+  //   );
+  // };
+
+  const onLoad = React.useCallback(
+    function callback(map) {
+      const bounds = new window.google.maps.LatLngBounds(center);
+      map.fitBounds(bounds);
+
+      setMap(map);
+    },
+    [center]
+  );
 
   const onUnmount = React.useCallback(function callback(map) {
     setMap(null);
@@ -176,7 +178,7 @@ const GoogleSection = () => {
       onLoad={onLoad}
       onUnmount={onUnmount}
     >
-      {/* {source.length != [] && (
+      {source.length != [] && (
         <MarkerF
           position={{
             lat: source.lat,
@@ -219,8 +221,8 @@ const GoogleSection = () => {
             </div>
           </OverlayView>
         </MarkerF>
-      )} */}
-      {source?.length != 0 &&
+      )}
+      {/* {source?.length != 0 &&
         source.map((waypoint, index) => (
           <MarkerF
             key={index}
@@ -243,7 +245,7 @@ const GoogleSection = () => {
               </div>
             </OverlayView>
           </MarkerF>
-        ))}
+        ))} */}
       {route && (
         <DirectionsRenderer
           directions={route}

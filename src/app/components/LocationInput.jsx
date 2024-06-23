@@ -14,36 +14,36 @@ export default function LocationInput({ type, value, setValue}) {
   // ****
 
 
-  // const { source, setSource } = useContext(SourceContext);
-  // const { destination, setDestination } = useContext(DestinationContext);
+  const { source, setSource } = useContext(SourceContext);
+  const { destination, setDestination } = useContext(DestinationContext);
 
-  // const getLatLng = (place, type) => {
-  //   const placeId = place ? place?.value?.place_id : null;
-  //   const service = new window.google.maps.places.PlacesService(
-  //     document.createElement("div")
-  //   );
+  const getLatLng = (place, type) => {
+    const placeId = place ? place?.value?.place_id : null;
+    const service = new window.google.maps.places.PlacesService(
+      document.createElement("div")
+    );
 
-  //   service.getDetails({ placeId }, (place, status) => {
-  //     console.log("place", place);
-      // if (status === "OK" && place.geometry && place.geometry.location) {
-      //   if (type === "source") {
-      //     setSource({
-      //       lat: place.geometry.location.lat(),
-      //       lng: place.geometry.location.lng(),
-      //       name: place.formatted_address,
-      //       label: place.name,
-      //     });
-      //   } else {
-      //     setDestination({
-      //       lat: place.geometry.location.lat(),
-      //       lng: place.geometry.location.lng(),
-      //       name: place.formatted_address,
-      //       label: place.name,
-      //     });
-      //   }
-      // }
-  //   });
-  // };
+    service.getDetails({ placeId }, (place, status) => {
+      console.log("place", place);
+      if (status === "OK" && place.geometry && place.geometry.location) {
+        if (type === "source") {
+          setSource({
+            lat: place.geometry.location.lat(),
+            lng: place.geometry.location.lng(),
+            name: place.formatted_address,
+            label: place.name,
+          });
+        } else {
+          setDestination({
+            lat: place.geometry.location.lat(),
+            lng: place.geometry.location.lng(),
+            name: place.formatted_address,
+            label: place.name,
+          });
+        }
+      }
+    });
+  };
 
   return (
     <>
@@ -51,7 +51,7 @@ export default function LocationInput({ type, value, setValue}) {
         selectProps={{
           value,
           onChange: (place) => {
-            // getLatLng(place, type);
+            getLatLng(place, type);
             setValue(place);
           },
           placeholder:
