@@ -22,7 +22,7 @@ const SearchPlaceSection = () => {
   const { source, setSource } = useContext(SourceContext);
   const { destination, setDestination } = useContext(DestinationContext);
 
-  // these two controls the autocomplete input fields
+  // these two control the autocomplete input fields
   const [srcValue, setSrcValue] = useState(null);
   const [destValue, setDestValue] = useState(null);
 
