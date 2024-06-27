@@ -1,4 +1,5 @@
-import { render, screen, within } from '@testing-library/react';
+import { render, screen, within, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 // import '@testing-library/jest-dom';
 import JestTest from '@/app/jest-test/page';
 
@@ -65,13 +66,19 @@ describe('JestTest', () => {
     expect(listitems).toHaveLength(2); // Assert
   })
 
-  it('the search input should work', () => {
+  it('the search input should work', async () => {
     render(<JestTest />); // Arrange
 
-    const element = screen.getByRole('searchBox'); // Act
+    // const searchBox = screen.getByRole('searchBox'); // Act
+    const searchBox = screen.getByPlaceholderText('Search...'); // Act
+    userEvent.type(searchBox, 'hello world');
+    expect(searchBox).toBeInTheDocument(); // Assert
 
+    await waitFor(() => {
+      const word = screen.getByText(/have input!!/i); // Act
+      expect(word).toBeVisible(); // Assert
+    });
 
-    expect(element).toBeInTheDocument(); // Assert
   })
 
 })

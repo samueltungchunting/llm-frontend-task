@@ -15,9 +15,12 @@ const JestTest = () => {
         type="text"
         role="searchBox"
         title="Search"
+        placeholder="Search..."
         value={inputVal}
         onChange={(ev) => setInputVal(ev.target.value)}
       />
+
+      {inputVal && <p>have input!!</p>}
 
       <ul aria-label="categories">
         <li aria-label="category">
